@@ -17,18 +17,22 @@ var Core = (function () {
     function initInstance() {
         var canvas = document.getElementById("board"),
             context = canvas.getContext('2d'),
-            game = Object.create(Game.prototype);
+            game = new Game();
+        game.loop(context);
         return {
             canvas: canvas,
             context: context,
             game: game
-        }
+        };
     }
 
     return {
-        getInstance: function() {
-            if (!instance) instance = initInstance();
+        getInstance: function () {
+            if (!instance) {
+                instance = initInstance();
+            }
             return instance;
         }
     };
 }());
+Core.getInstance();
