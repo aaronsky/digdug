@@ -6,8 +6,8 @@ draw black square in buffer where player is
 draw player
 draw enemies
 
-player - 14 x 14 (1 square)
-board - 14 squares by 18 squares (196 x 252)
+player - 16 x 16 (1 square)
+board - 14 squares by 18 squares (224 x 288)
 */
 
 "use strict";
@@ -17,8 +17,10 @@ var Core = (function () {
     function initInstance() {
         var canvas = document.getElementById("board"),
             context = canvas.getContext('2d'),
-            game = new Game();
+            game = new Game(canvas.width, canvas.height);
+        
         game.loop(context);
+        
         return {
             canvas: canvas,
             context: context,
