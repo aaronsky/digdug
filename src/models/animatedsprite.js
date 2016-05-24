@@ -56,15 +56,10 @@ export default class AnimatedSprite extends Sprite {
     }
     draw(ctx) {
         super.draw(ctx, {
-            image: this.image,
-            sx: this.frameIndex * this.width + this.spriteData.originX,
-            sy: this.spriteData.originY,
-            sWidth: this.width,
-            sHeight: this.height,
-            dx: this.x,
-            dy: this.y,
-            dWidth: this.width,
-            dHeight: this.height
+            x: this.frameIndex * this.width + this.spriteData.originX,
+            y: this.spriteData.originY,
+            width: this.width,
+            height: this.height
         });
     }
 }

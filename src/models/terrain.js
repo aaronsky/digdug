@@ -8,13 +8,15 @@ export default class Terrain extends Sprite {
         super({
             image: ResourceManager.getResource('background'),
             x: 0,
-            y: 0
+            y: 0,
+            width: 224,
+            height: 288
         });
     }
-    update () {
-        
+    update() {
+
     }
-    draw (ctx) {
-        super.draw(ctx, this.groundImage, 0, 0);
+    draw(ctx) {
+        super.draw(ctx);
     }
 }
