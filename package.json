@@ -1,0 +1,36 @@
+{
+  "name": "digdug",
+  "version": "0.1.0",
+  "description": "a digdug clone",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --hot --inline"
+  },
+  "main": "src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronsky/digdug.git"
+  },
+  "author": "Aaron Sky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronsky/digdug/issues"
+  },
+  "homepage": "https://github.com/aaronsky/digdug#readme",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "copy-webpack-plugin": "^3.0.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

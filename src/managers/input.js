@@ -1,6 +1,6 @@
 "use strict";
 
-var Keys = {
+export var Keys = {
     KEY_A: 65,
     KEY_D: 87,
     KEY_S: 83,
@@ -12,10 +12,10 @@ var Keys = {
     KEY_SPACE: 32
 };
 
-var ALL_MOVE_KEYS = Object.keys(Keys).map(function (key) {
+export var ALL_MOVE_KEYS = Object.keys(Keys).map((key) => {
     if (key !== 'KEY_SPACE') {
         return Keys[key];
     }
     return;
 });
-var ALL_KEYS = ALL_MOVE_KEYS.concat([Keys.KEY_SPACE]);
+export var ALL_KEYS = ALL_MOVE_KEYS.concat([Keys.KEY_SPACE]);

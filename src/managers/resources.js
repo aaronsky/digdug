@@ -3,27 +3,29 @@
 var preloadList = [
     {
         name: "characters",
-        path: "img/digdug.png",
+        path: "images/digdug.png",
         type: "png"
     },
     {
         name: "background",
-        path: "img/background.png",
+        path: "images/background.png",
         type: "png"
     },
     {
         name: "main",
-        path: "sound/main.ogg",
+        path: "sounds/main.ogg",
         type: "ogg"
     }
 ];
 
-var ResourceManager = {
-    resources: {},
-    getResource: function (name) {
+class Resources {
+    constructor() {
+        this.resources = {};
+    }
+    getResource(name) {
         return this.resources[name];
-    },
-    loadResource: function (resource) {
+    }
+    loadResource(resource) {
         if (this.resources[resource.name] === undefined) {
             if (resource.type === "png") {
                 this.resources[resource.name] = new Image();
@@ -35,8 +37,12 @@ var ResourceManager = {
             }
             
         }
-    },
-    preloadContent: function () {
-        preloadList.forEach(function (element) {this.loadResource(element); }.bind(this));
     }
-};
+    preloadContent() {
+        preloadList.forEach((element) => {
+            this.loadResource(element);
+        });
+    }
+}
+
+export let ResourceManager = new Resources();
