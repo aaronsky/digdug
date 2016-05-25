@@ -1,7 +1,7 @@
 "use strict";
 
-import { ALL_KEYS, ALL_MOVE_KEYS } from '../managers/input';
 import AnimatedSprite from './animatedsprite';
+import { Keys, InputManager } from '../managers/input';
 import { ResourceManager } from '../managers/resources';
 
 var Directions = {
@@ -28,44 +28,43 @@ export default class Player extends AnimatedSprite {
                 chunk_H: 16
             }
         });
-        document.addEventListener("keydown", (e) => { this.keyRespond(e); });
-        document.addEventListener("keyup", (e) => {
-            e = e || event;
-            if (ALL_KEYS.indexOf(e.keyCode) === -1) {
-                return;
-            }
-            if (e.keyCode === 32) {
-                this.isPumping = false;
-            } else if (ALL_MOVE_KEYS.indexOf(e.keyCode) !== -1) {
-                this.isMoveKeyDown = false;
-                ResourceManager.getResource('main').pause();
-            }
-        });
         this.currentDirection = Directions.RIGHT;
         this.isPumping = false;
         this.directionChanged = false;
         this.isMoveKeyDown = false;
+        InputManager.addKeyListener('down', this);
+        InputManager.addKeyListener('up', this);
     }
-    keyRespond(e) {
-        e = e || event; //IE Compatibility
-        if (e.keyCode === 32) {
+    keyDown(key) {
+        if (key === Keys.SPACE) {
             this.isPumping = true;
         }
-        if (ALL_MOVE_KEYS.indexOf(e.keyCode) !== -1) {
+        if (InputManager.isMoveKey(key)) {
             this.isMoveKeyDown = true;
         }
-        if ((e.keyCode === 37 || e.keyCode === 65) && this.currentDirection !== Directions.LEFT) {
+        if ((key === Keys.LEFT || key === Keys.A) && this.currentDirection !== Directions.LEFT) {
             this.currentDirection = Directions.LEFT;
             this.directionChanged = true;
-        } else if ((e.keyCode === 38 || e.keyCode === 87) && this.currentDirection !== Directions.UP) {
+        } else if ((key === Keys.UP || key === Keys.D) && this.currentDirection !== Directions.UP) {
             this.currentDirection = Directions.UP;
             this.directionChanged = true;
-        } else if ((e.keyCode === 39 || e.keyCode === 68) && this.currentDirection !== Directions.RIGHT) {
+        } else if ((key === Keys.RIGHT || key === Keys.W) && this.currentDirection !== Directions.RIGHT) {
             this.currentDirection = Directions.RIGHT;
             this.directionChanged = true;
-        } else if ((e.keyCode === 40 || e.keyCode === 83) && this.currentDirection !== Directions.DOWN) {
+        } else if ((key === Keys.DOWN || key === Keys.S) && this.currentDirection !== Directions.DOWN) {
             this.currentDirection = Directions.DOWN;
             this.directionChanged = true;
+        }
+    }
+    keyUp(key) {
+        if (!InputManager.isKnownKey(key)) {
+            return;
+        }
+        if (key === Keys.SPACE) {
+            this.isPumping = false;
+        } else if (InputManager.isMoveKey(key)) {
+            this.isMoveKeyDown = false;
+            ResourceManager.getResource('main').pause();
         }
     }
     update() {
